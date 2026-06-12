@@ -1,0 +1,17 @@
+1) Start the kafka server in windows-
+bin/kafka-server-start.sh config/server.properties
+
+bin\windows\kafka-console-producer.bat --topic order-topic --bootstrap-server localhost:9092
+
+bin\windows\kafka-console-consumer.bat --topic order-topic --bootstrap-server localhost:9092
+
+1) Start kafka in docker container
+In power shell-(trusting_poincare is docker container name)
+1. docker exec -it trusting_poincare /opt/kafka/bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+
+2. docker exec -it trusting_poincare bash
+
+3. /opt/kafka/bin/kafka-topics.sh --create --topic order-topic --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+4. /opt/kafka/bin/kafka-consumer-groups.sh  --bootstrap-server localhost:9092 --describe --group my-group
+
+

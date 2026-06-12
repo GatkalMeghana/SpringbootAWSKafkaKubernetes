@@ -1,0 +1,5 @@
+Kubelets commands-
+1)kubectl cluster-info किंवा kubectl get nodes
+2)intereact with pod we need to go into the container , this command will run in intereactive mod- 
+	kubectl exec -it webapp -- sh
+	kubectl exec -it webapp-787cdc56bd-mr82r -- sh

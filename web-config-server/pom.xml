@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.forrester</groupId>
+	<artifactId>ForrCloudConfigService</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>ForrCloudConfigService</name>
+	<description>Forrester Cloud Configuration Service</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.8.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Edgware.SR6</spring-cloud.version>
+	</properties>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>internal.repo.snapshot</id>
+			<name>Forrester Snapshot Repository</name>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/forrester_snapshot/repository/</url>
+		</snapshotRepository>
+		<repository>
+			<id>internal.repo</id>
+			<name>Forrester Internal Repository</name>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/local/repository/</url>
+		</repository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<finalName>ForrCloudConfigService</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.tigris.antelope</groupId>
+						<artifactId>antelopetasks</artifactId>
+						<version>3.2.10</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-jsch</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>com.jcraft</groupId>
+						<artifactId>jsch</artifactId>
+						<version>0.1.54</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<id>serverdeploy</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="if" classname="ise.antelope.tasks.IfTask" />
+								<if name="environment.name" value="local">
+									<echo message="Creating deploy directory on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										passphrase="" trust="true" keyfile="c:/keys/id_rsa_tomcat"
+										failonerror="true" timeout="300000" command="mkdir -p /home/tomcat/deploy" />
+
+									<echo message="Sending deploy and startup script to ${deploy.target}" />
+									<scp remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${basedir}/src/deploy/deploy.sh" />
+
+									<scp remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${basedir}/src/deploy/startup.sh" />
+
+									<echo message="Sending artifact to ${deploy.target}" />
+									<scp remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+									<echo message="Running deploy script on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										command="chmod a+x /home/tomcat/deploy/deploy.sh ; /home/tomcat/deploy/deploy.sh"
+										failonerror="true" timeout="300000" />
+
+									<echo message="Running startup script on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										command="chmod a+x /home/tomcat/deploy/startup.sh ; 
+										/home/tomcat/deploy/startup.sh ${propKey} ${profile} ${gitUname} ${gitUpwd} ${configUser} ${configPass}"
+										failonerror="true" timeout="300000" />
+									<else>
+										<if name="deploy.target1">
+											<echo message="Creating deploy directory on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												passphrase="" trust="true" keyfile="/home/forrestr/.ssh/hudson-key"
+												failonerror="true" timeout="300000" command="mkdir -p /home/tomcat/deploy" />
+
+											<echo message="Sending deploy script to ${deploy.target1}" />
+											<scp remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/deploy.sh" />
+
+											<scp remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/startup.sh" />
+
+											<echo message="Sending artifact to ${deploy.target1}" />
+											<scp remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo message="Running deploy script on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/deploy.sh ; /home/tomcat/deploy/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo message="Running startup script on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/startup.sh ; 
+												/home/tomcat/deploy/startup.sh ${propKey} ${profile} ${gitUname} ${gitUpwd} ${configUser} ${configPass}"
+												failonerror="true" timeout="300000" />
+										</if>
+
+										<if name="deploy.target2">
+											<echo message="Creating deploy directory on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												passphrase="" trust="true" keyfile="/home/forrestr/.ssh/hudson-key"
+												failonerror="true" timeout="300000" command="mkdir -p /home/tomcat/deploy" />
+
+											<echo
+												message="Sending deploy and startup script to ${deploy.target2}" />
+											<scp remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/deploy.sh" />
+
+											<scp remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/startup.sh" />
+
+											<echo message="Sending artifact to ${deploy.target2}" />
+											<scp remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo message="Running deploy script on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/deploy.sh ; /home/tomcat/deploy/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo message="Running startup script on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/startup.sh ; 
+												/home/tomcat/deploy/startup.sh ${propKey} ${profile} ${gitUname} ${gitUpwd} ${configUser} ${configPass}"
+												failonerror="true" timeout="300000" />
+										</if>
+
+										<if name="deploy.target3">
+											<echo message="Creating deploy directory on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												passphrase="" trust="true" keyfile="/home/forrestr/.ssh/hudson-key"
+												failonerror="true" timeout="300000" command="mkdir -p /home/tomcat/deploy" />
+
+											<echo
+												message="Sending deploy and startup script to ${deploy.target3}" />
+											<scp remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/deploy.sh" />
+
+											<scp remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true" file="${basedir}/src/deploy/startup.sh" />
+
+											<echo message="Sending artifact to ${deploy.target3}" />
+											<scp remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo message="Running deploy script on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/deploy.sh ; /home/tomcat/deploy/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo message="Running startup script on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/startup.sh ; 
+												/home/tomcat/deploy/startup.sh ${propKey} ${profile} ${gitUname} ${gitUpwd} ${configUser} ${configPass}"
+												failonerror="true" timeout="300000" />
+										</if>
+									</else>
+								</if>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

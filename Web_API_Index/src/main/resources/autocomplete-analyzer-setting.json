@@ -1,0 +1,27 @@
+{
+  "index": {
+    "max_ngram_diff": 50,
+    "analysis": {
+      "analyzer": {
+        "auto_complete_analyzer": {
+          "tokenizer": "auto_complete_tokenizer",
+          "filter": ["lowercase", "asciifolding"]
+        },
+        "auto_complete_search_analyzer": {
+          "tokenizer": "keyword",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      },
+      "tokenizer": {
+        "auto_complete_tokenizer": {
+          "type": "ngram",
+          "min_gram": 3,
+          "max_gram": 50
+        }
+      }
+    }
+  }
+}

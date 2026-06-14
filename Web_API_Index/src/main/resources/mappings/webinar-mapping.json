@@ -1,0 +1,615 @@
+{
+	"properties": {
+		"_class": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"analysts": {
+			"properties": {
+				"active": {
+					"type": "boolean"
+				},
+				"authorTitle": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"firstName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"fullName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"id": {
+					"type": "long"
+				},
+				"imageUrl": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"lastName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"signature": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"telConferenceAuthLinkId": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"contentId": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				}
+			}
+		},
+		"attachments": {
+			"properties": {
+				"extension": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"fullPath": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"name": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"type": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				}
+			}
+		},
+		"businessTopics": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"contentId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"countryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"duration": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"endTime": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"eventDate": {
+			"type": "date"
+		},
+		"eventEndDateTime": {
+			"type": "date"
+		},
+		"eventStartDateTime": {
+			"type": "date"
+		},
+		"geographies": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"highlight": {
+			"type": "text",
+			"store": true,
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "body_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer",
+					"store": true
+				}
+			}
+		},
+		"industries": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"industryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"marketImperatives": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdPriority": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdService": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"price": {
+			"type": "long"
+		},
+		"primaryRoles": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"products": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"publishedDate": {
+			"type": "date"
+		},
+		"lastModifiedDate": {
+			"type": "date"
+		},
+		"regions": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"relatedResearch": {
+			"properties": {
+				"researchID": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"telConferenceDocLinkId": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"title": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				}
+			}
+		},
+		"roles": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"services": {
+			"type": "nested",
+			"properties": {
+				"priorities": {
+					"type": "nested",
+					"properties": {
+						"phases": {
+							"type": "nested",
+							"properties": {
+								"phaseId": {
+									"type": "text"
+								},
+								"phaseName": {
+									"type": "text"
+								}
+							}
+						},
+						"priorityId": {
+							"type": "text"
+						},
+						"priorityName": {
+							"type": "text"
+						}
+					}
+				},
+				"serviceId": {
+					"type": "text"
+				},
+				"serviceName": {
+					"type": "text"
+				}
+			}
+		},
+		"startTime": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"subTitle": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"subType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"technologyAndServices": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "title_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				},
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "title_analyzer",
+			"search_analyzer": "title_search_analyzer"
+		},
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"topics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"topicsAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"vendors": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"vision": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarID": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarOverview": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"webinarThumbnailURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarVideoLink": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"mediaProviderId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"updatedDate": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"participationDetails": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarCode": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"entryId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"editorialImage": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"webinarStatus": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"isRegistered": {
+			"type": "boolean"
+		},
+		"slug": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		}
+	}
+}

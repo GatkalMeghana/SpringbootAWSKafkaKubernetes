@@ -1,0 +1,61 @@
+{
+	"properties": {
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"subTitle": {
+			"type": "text",
+			"analyzer": "synonym_analyzer",
+			"search_analyzer": "synonym_search_analyzer"
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "synonym_analyzer",
+			"search_analyzer": "synonym_search_analyzer"
+		},
+		"services": {
+			"type": "nested",
+			"properties": {
+				"id": {
+					"type": "text"
+				},
+				"name": {
+					"type": "text"
+				},
+				"priorities": {
+					"type": "nested",
+					"properties": {
+						"id": {
+							"type": "text"
+						},
+						"name": {
+							"type": "text"
+						},
+						"phases": {
+							"type": "nested",
+							"properties": {
+								"id": {
+									"type": "text"
+								},
+								"name": {
+									"type": "text"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

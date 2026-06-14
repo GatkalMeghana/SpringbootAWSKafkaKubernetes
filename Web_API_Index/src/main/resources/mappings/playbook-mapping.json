@@ -1,0 +1,418 @@
+{
+	"properties": {
+		"_class": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"businessTopics": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"contentCategories": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"countryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"description": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"executiveOverview": {
+			"properties": {
+				"document_id": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"document_title": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				}
+			}
+		},
+		"geographies": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"highlight": {
+			"type": "text",
+			"store": true,
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "body_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer",
+					"store": true
+				}
+			}
+		},
+		"homePageTitle": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"image": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"industries": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"industryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"keywords": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdPriority": {
+			"fields": {
+				"keyword": {
+					"ignore_above": 256,
+					"type": "keyword"
+				}
+			},
+			"type": "text"
+		},
+		"playbookID": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"playbookType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"primaryRoles": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"products": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"publishedDate": {
+			"type": "date"
+		},
+		"roles": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"searchables": {
+			"properties": {
+				"howForresterCanHelp": {
+					"type": "text",
+					"fields": {
+						"shingle": {
+							"type": "text",
+							"analyzer": "body_shingle_analyzer"
+						}
+					},
+					"analyzer": "body_analyzer",
+					"search_analyzer": "body_search_analyzer"
+				},
+				"mainReportData": {
+					"type": "text",
+					"fields": {
+						"shingle": {
+							"type": "text",
+							"analyzer": "body_shingle_analyzer"
+						}
+					},
+					"analyzer": "body_analyzer",
+					"search_analyzer": "body_search_analyzer"
+				},
+				"recommendations": {
+					"type": "text",
+					"fields": {
+						"shingle": {
+							"type": "text",
+							"analyzer": "body_shingle_analyzer"
+						}
+					},
+					"analyzer": "body_analyzer",
+					"search_analyzer": "body_search_analyzer"
+				},
+				"researchAbstract": {
+					"type": "text",
+					"copy_to": [
+						"highlight"
+					]
+				},
+				"researchTitle": {
+					"type": "text",
+					"copy_to": [
+						"highlight"
+					]
+				},
+				"whatItMeans": {
+					"type": "text",
+					"fields": {
+						"shingle": {
+							"type": "text",
+							"analyzer": "body_shingle_analyzer"
+						}
+					},
+					"analyzer": "body_analyzer",
+					"search_analyzer": "body_search_analyzer"
+				}
+			}
+		},
+		"services": {
+			"type": "nested",
+			"properties": {
+				"priorities": {
+					"type": "nested",
+					"properties": {
+						"phases": {
+							"type": "nested",
+							"properties": {
+								"phaseId": {
+									"type": "text"
+								},
+								"phaseName": {
+									"type": "text"
+								}
+							}
+						},
+						"priorityId": {
+							"type": "text"
+						},
+						"priorityName": {
+							"type": "text"
+						}
+					}
+				},
+				"serviceId": {
+					"type": "text"
+				},
+				"serviceName": {
+					"type": "text"
+				}
+			}
+		},
+		"subType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "title_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				},
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "title_analyzer",
+			"search_analyzer": "title_search_analyzer"
+		},
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"topics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"topicsAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"vendors": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"vision": {
+			"fields": {
+				"keyword": {
+					"ignore_above": 256,
+					"type": "keyword"
+				}
+			},
+			"type": "text"
+		}
+	}
+}

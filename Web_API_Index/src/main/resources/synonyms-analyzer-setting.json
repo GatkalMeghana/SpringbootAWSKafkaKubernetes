@@ -1,0 +1,168 @@
+{
+	"index": {
+		"knn": true,
+		"knn.space_type": "cosinesimil",
+		"analysis": {
+			"filter": {
+				"my_snowball": {
+					"type": "snowball",
+					"language": "English"
+				},
+				"my_stop_words": {
+					"type": "stop",
+					"ignore_case": true,
+					"stopwords": [
+						"a",
+						"an",
+						"and",
+						"are",
+						"as",
+						"at",
+						"be",
+						"but",
+						"by",
+						"for",
+						"if",
+						"in",
+						"into",
+						"is",
+						"no",
+						"not",
+						"of",
+						"on",
+						"or",
+						"such",
+						"that",
+						"the",
+						"their",
+						"then",
+						"there",
+						"these",
+						"they",
+						"this",
+						"to",
+						"was",
+						"will",
+						"with"
+					]
+				},
+				"my_title_shingle": {
+					"type": "shingle",
+					"min_shingle_size": 2,
+					"max_shingle_size": 5,
+					"filler_token": "",
+					"output_unigrams": false
+				},
+				"my_body_shingle": {
+					"type": "shingle",
+					"min_shingle_size": 2,
+					"max_shingle_size": 2,
+					"filler_token": "",
+					"output_unigrams": false
+				},
+				"graph_synonyms": {
+					"type": "synonym_graph",
+					"synonyms_path": "SYNONYM-FILE-PATH"
+				},
+				"custom_stems": {
+					"type": "stemmer_override",
+					"rules": [
+						"governance => governance"
+					]
+				}
+			},
+			"analyzer": {
+				"simple_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding"
+					],
+					"tokenizer": "standard"
+				},
+				"title_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"my_stop_words",
+						"custom_stems",
+						"my_snowball"
+					],
+					"tokenizer": "standard"
+				},
+				"title_search_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"graph_synonyms",
+						"my_stop_words",
+						"custom_stems",
+						"my_snowball"
+					],
+					"tokenizer": "standard"
+				},
+				"title_shingle_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"custom_stems",
+						"my_snowball",
+						"my_title_shingle"
+					],
+					"tokenizer": "standard"
+				},
+				"body_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"my_stop_words",
+						"custom_stems",
+						"my_snowball"
+					],
+					"tokenizer": "standard"
+				},
+				"body_search_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"graph_synonyms",
+						"my_stop_words",
+						"custom_stems",
+						"my_snowball"
+					],
+					"tokenizer": "standard"
+				},
+				"body_shingle_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"custom_stems",
+						"my_snowball",
+						"my_body_shingle"
+					],
+					"tokenizer": "standard"
+				},
+				"synonym_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding"
+					],
+					"tokenizer": "standard"
+				},
+				"synonym_search_analyzer": {
+					"filter": [
+						"lowercase",
+						"asciifolding",
+						"graph_synonyms"
+					],
+					"tokenizer": "standard"
+				},
+				"vendor_analyzer": {
+					"filter": [
+						"lowercase"
+					],
+					"tokenizer": "standard"
+				}
+			}
+		}
+	}
+}

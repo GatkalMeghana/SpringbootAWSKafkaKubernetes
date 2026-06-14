@@ -1,0 +1,400 @@
+{
+	"properties": {
+		"_class": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"businessTopics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"contentId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"countryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"endDate": {
+			"type": "date"
+		},
+		"forumID": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"forumOverview": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"forumURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"geographies": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"highlight": {
+			"type": "text",
+			"store": true,
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "body_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer",
+					"store": true
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"industries": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"industryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"location": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdPriority": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdService": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"primaryRoles": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"products": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"publishedDate": {
+			"type": "date"
+		},
+		"roles": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"services": {
+			"type": "nested",
+			"properties": {
+				"priorities": {
+					"type": "nested",
+					"properties": {
+						"phases": {
+							"type": "nested",
+							"properties": {
+								"phaseId": {
+									"type": "text"
+								},
+								"phaseName": {
+									"type": "text"
+								}
+							}
+						},
+						"priorityId": {
+							"type": "text"
+						},
+						"priorityName": {
+							"type": "text"
+						}
+					}
+				},
+				"serviceId": {
+					"type": "text"
+				},
+				"serviceName": {
+					"type": "text"
+				}
+			}
+		},
+		"speakers": {
+			"properties": {
+				"fullName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"id": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"contentId": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"title": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"active": {
+					"type": "boolean"
+				},
+				"firstName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"lastName": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"analystId": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"imageUrl": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				}
+			}
+		},
+		"startDate": {
+			"type": "date"
+		},
+		"subTitle": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"subType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "title_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				},
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "title_analyzer",
+			"search_analyzer": "title_search_analyzer"
+		},
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"topics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"topicsAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"vendors": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"vision": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		}
+	}
+}

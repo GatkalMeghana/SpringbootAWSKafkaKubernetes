@@ -1,0 +1,448 @@
+{
+	"properties": {
+		"_class": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"subType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"surveyTopics": {
+			"type": "text",
+			"copy_to": "highlight"
+		},
+		"businessOrConsumer": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"businessTopics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"contentId": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contents": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"contentURL": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"countryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"createdAt": {
+			"type": "date"
+		},
+		"description": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"downloads": {
+			"type": "nested",
+			"properties": {
+				"id": {
+					"type": "text"
+				},
+				"title": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"description": {
+					"type": "text"
+				},
+				"createdAt": {
+					"type": "date"
+				},
+				"updatedAt": {
+					"type": "date"
+				},
+				"file": {
+					"type": "nested",
+					"properties": {
+						"url": {
+							"type": "text"
+						},
+						"fileName": {
+							"type": "text"
+						},
+						"contentType": {
+							"type": "text"
+						},
+						"details": {
+							"type": "nested",
+							"properties": {
+								"size": {
+									"type": "long"
+								},
+								"image": {
+									"type": "nested",
+									"properties": {
+										"width": {
+											"type": "long"
+										},
+										"height": {
+											"type": "long"
+										}
+									}
+								}
+								
+							}
+						}
+					}
+				}
+			}
+		},
+		"geographies": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"highlight": {
+			"type": "text",
+			"store": true,
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "body_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer",
+					"store": true
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"industries": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"industryAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"ipType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"maturity": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"methodologyDescription": {
+			"type": "text"
+		},
+		"officialSurveyName": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdPriority": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"oldSdService": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"pleaseNote": {
+			"type": "text"
+		},
+		"products": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"publishedDate": {
+			"type": "date"
+		},
+		"regions": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"respondents": {
+			"type": "integer"
+		},
+		"roles": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"shortTitle": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"services": {
+			"type": "nested",
+			"properties": {
+				"priorities": {
+					"type": "nested",
+					"properties": {
+						"phases": {
+							"type": "nested",
+							"properties": {
+								"phaseId": {
+									"type": "text"
+								},
+								"phaseName": {
+									"type": "text"
+								}
+							}
+						},
+						"priorityId": {
+							"type": "text"
+						},
+						"priorityName": {
+							"type": "text"
+						}
+					}
+				},
+				"serviceId": {
+					"type": "text"
+				},
+				"serviceName": {
+					"type": "text"
+				}
+			}
+		},
+		"summary": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"surveyID": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"surveyType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "title_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				},
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "title_analyzer",
+			"search_analyzer": "title_search_analyzer"
+		},
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"topics": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"topicsAgg": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"updatedAt": {
+			"type": "date"
+		},
+		"vendors": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			},
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer"
+		},
+		"vision": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"year": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		}
+	}
+}

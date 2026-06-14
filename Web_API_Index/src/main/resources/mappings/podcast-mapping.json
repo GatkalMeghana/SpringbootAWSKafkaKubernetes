@@ -1,0 +1,135 @@
+{
+	"properties": {
+		"_class": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"body": {
+			"type": "text",
+			"copy_to": [
+				"highlight"
+			]
+		},
+		"categories": {
+			"type": "text",
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				}
+			}
+		},
+		"duration": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"excerpt": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"highlight": {
+			"type": "text",
+			"store": true,
+			"analyzer": "body_analyzer",
+			"search_analyzer": "body_search_analyzer",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "body_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer",
+					"store": true
+				}
+			}
+		},
+		"permalink": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"podcastID": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"publishedDate": {
+			"type": "date"
+		},
+		"searchable_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"subType": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		},
+		"title": {
+			"type": "text",
+			"fields": {
+				"shingle": {
+					"type": "text",
+					"analyzer": "title_shingle_analyzer"
+				},
+				"simple": {
+					"type": "text",
+					"analyzer": "simple_analyzer"
+				},
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			},
+			"analyzer": "title_analyzer",
+			"search_analyzer": "title_search_analyzer"
+		},
+		"title_vector": {
+			"type": "knn_vector",
+			"dimension": 100
+		},
+		"url": {
+			"type": "text",
+			"fields": {
+				"keyword": {
+					"type": "keyword",
+					"ignore_above": 256
+				}
+			}
+		}
+	}
+}

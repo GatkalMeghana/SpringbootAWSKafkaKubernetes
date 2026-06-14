@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.forrester</groupId>
+	<artifactId>research-service</artifactId>
+	<version>1.0.0</version>
+	<name>ResearchService</name>
+	<description>Provides the research content</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jmockit.version>1.45</jmockit.version>
+		<jacoco.version>0.8.5</jacoco.version>
+		<skip.jacoco>false</skip.jacoco>
+		<swagger.version>3.0.0</swagger.version>
+		<contentful.sdk.version>10.4.4</contentful.sdk.version>
+		<aws.sdk.auth.version>2.10.5</aws.sdk.auth.version>
+		<aws.sdk.bom.version>2.15.0</aws.sdk.bom.version>
+		<sonar.exclusions>**/ApplicationMain.*,**/ApplicationConfig.*,**/AWSESInterceptor.*,**/LoggingAspect.*,**/LogThis.*,**/CacheConfig.*,**/CacheEventLogger.*,**/RedisConfig.*</sonar.exclusions>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>io.lettuce</groupId>
+					<artifactId>lettuce-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin.external.google</groupId>
+					<artifactId>android-json</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.14.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<version>1.45</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.contentful.java</groupId>
+			<artifactId>java-sdk</artifactId>
+			<version>${contentful.sdk.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.squareup.okhttp3</groupId>
+					<artifactId>okhttp</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.jhipster</groupId>
+			<artifactId>jhipster</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>auth</artifactId>
+			<version>${aws.sdk.auth.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<!-- Response mapping for description field in ContentMetadata. -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.13.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>simplefan</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>com.github.slugify</groupId>
+		    <artifactId>slugify</artifactId>
+		    <version>2.5</version>
+		</dependency>
+		
+ 		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+ 			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>bom</artifactId>
+				<version>${aws.sdk.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<finalName>research-service</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.forrester.research.ApplicationMain</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.tigris.antelope</groupId>
+						<artifactId>antelopetasks</artifactId>
+						<version>3.2.10</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-jsch</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>com.jcraft</groupId>
+						<artifactId>jsch</artifactId>
+						<version>0.1.54</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<id>serverdeploy</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="if" classname="ise.antelope.tasks.IfTask" />
+								<if name="environment.name" value="local">
+									<echo
+										message="Creating deploy directory on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										command="mkdir -p /home/tomcat/deploy/Forrester/ResearchService"
+										failonerror="true" timeout="300000" />
+
+									<echo
+										message="Sending deploy and startup script to ${deploy.target}" />
+									<scp
+										remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/Forrester/ResearchService"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${project.build.directory}/deploy/deploy.sh" />
+
+									<scp
+										remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/Forrester/ResearchService"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${project.build.directory}/deploy/startup.sh" />
+
+									<scp
+										remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/Forrester/ResearchService"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${project.build.directory}/deploy/restart.sh" />
+
+									<echo message="Sending artifact to ${deploy.target}" />
+									<scp
+										remoteTodir="tomcat@${deploy.target}:/home/tomcat/deploy/Forrester/ResearchService"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+									<echo message="Running deploy script on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/deploy.sh ; /home/tomcat/deploy/Forrester/ResearchService/deploy.sh"
+										failonerror="true" timeout="300000" />
+
+									<echo message="Running startup script on ${deploy.target}" />
+									<sshexec host="${deploy.target}" username="tomcat"
+										keyfile="c:/keys/id_rsa_tomcat" passphrase="" trust="true"
+										command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/startup.sh ; source .bash_profile; /home/tomcat/deploy/Forrester/ResearchService/startup.sh ${profile}"
+										failonerror="true" timeout="300000" />
+									<else>
+										<if name="deploy.target1">
+											<echo
+												message="Creating deploy directory on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												passphrase="" trust="true"
+												keyfile="/home/forrestr/.ssh/hudson-key" failonerror="true"
+												timeout="300000"
+												command="mkdir -p /home/tomcat/deploy/Forrester/ResearchService" />
+
+											<echo
+												message="Sending deploy script to ${deploy.target1}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/deploy.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/startup.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/restart.sh" />
+
+											<echo message="Sending artifact to ${deploy.target1}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target1}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo
+												message="Running deploy script on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/deploy.sh ; /home/tomcat/deploy/Forrester/ResearchService/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo
+												message="Running startup script on ${deploy.target1}" />
+											<sshexec host="${deploy.target1}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/startup.sh ; source .bash_profile; /home/tomcat/deploy/Forrester/ResearchService/startup.sh ${profile}"
+												failonerror="true" timeout="300000" />
+										</if>
+										<if name="deploy.target2">
+											<echo
+												message="Creating deploy directory on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												passphrase="" trust="true"
+												keyfile="/home/forrestr/.ssh/hudson-key" failonerror="true"
+												timeout="300000"
+												command="mkdir -p /home/tomcat/deploy/Forrester/ResearchService" />
+
+											<echo
+												message="Sending deploy and startup script to ${deploy.target2}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/deploy.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/startup.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/restart.sh" />
+
+											<echo message="Sending artifact to ${deploy.target2}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target2}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo
+												message="Running deploy script on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/deploy.sh ; /home/tomcat/deploy/Forrester/ResearchService/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo
+												message="Running startup script on ${deploy.target2}" />
+											<sshexec host="${deploy.target2}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/startup.sh ; source .bash_profile; /home/tomcat/deploy/Forrester/ResearchService/startup.sh ${profile}"
+												failonerror="true" timeout="300000" />
+										</if>
+
+										<if name="deploy.target3">
+											<echo
+												message="Creating deploy directory on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												passphrase="" trust="true"
+												keyfile="/home/forrestr/.ssh/hudson-key" failonerror="true"
+												timeout="300000"
+												command="mkdir -p /home/tomcat/deploy/Forrester/ResearchService" />
+
+											<echo
+												message="Sending deploy and startup script to ${deploy.target3}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/deploy.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/startup.sh" />
+
+											<scp
+												remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/deploy/restart.sh" />
+
+											<echo message="Sending artifact to ${deploy.target3}" />
+											<scp
+												remoteTodir="tomcat@${deploy.target3}:/home/tomcat/deploy/Forrester/ResearchService"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+
+											<echo
+												message="Running deploy script on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/deploy.sh ; /home/tomcat/deploy/Forrester/ResearchService/deploy.sh"
+												failonerror="true" timeout="300000" />
+
+											<echo
+												message="Running startup script on ${deploy.target3}" />
+											<sshexec host="${deploy.target3}" username="tomcat"
+												keyfile="/home/forrestr/.ssh/hudson-key" passphrase=""
+												trust="true"
+												command="chmod a+x /home/tomcat/deploy/Forrester/ResearchService/startup.sh ; source .bash_profile; /home/tomcat/deploy/Forrester/ResearchService/startup.sh ${profile}"
+												failonerror="true" timeout="300000" />
+										</if>
+									</else>
+								</if>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- This plugin will copy the src/deploy directory into target/ -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/deploy</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/deploy</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+						-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.exec
+					</argLine>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<skip>${skip.jacoco}</skip>
+					<excludes>
+						<exclude>**/ApplicationMain.*</exclude>
+						<exclude>**/ApplicationConfig.*</exclude>
+						<exclude>**/AWSESInterceptor.*</exclude>
+						<exclude>**/LoggingAspect.*</exclude>
+						<exclude>**/RedisConfig.*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<propertyName>jacoco.argline</propertyName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>INSTRUCTION</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>METHOD</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>CLASS</counter>
+											<value>MISSEDCOUNT</value>
+											<maximum>0</maximum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+
+		<repository>
+			<id>internal.repo.snapshot</id>
+			<name>Forrester Internal Repository</name>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/forrester_snapshot/repository/
+			</url>
+		</repository>
+		<repository>
+			<id>internal.repo</id>
+			<name>Forrester Internal Repository</name>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/forrester_snapshot/</url>
+		</repository>
+		<repository>
+			<id>internal.repo.2</id>
+			<name>Forrester Internal Repository</name>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/local/repository/</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<url>http://camb-webadmin21.forrester.com:8081/nexus/content/repositories/central/</url>
+		</repository>
+	</repositories>
+
+</project>
